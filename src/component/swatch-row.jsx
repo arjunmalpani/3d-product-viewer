@@ -12,7 +12,7 @@ export default function SwatchRow({ label, colors, value, onChange }) {
                         className={`h-10 w-10 rounded-full ring-2 ${
                             value === c.hex
                                 ? "ring-white/60 scale-110"
-                                : "ring-transparent"
+                                : "ring-white/20"
                         }`}
                     />
                 ))}

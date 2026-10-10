@@ -13,6 +13,7 @@ export default function Scene({
     selectedPart,
     spinning,
     pauseSpin,
+    captureRef
 }) {
     const handleSelect = (part) => {
         pauseSpin(6000);
@@ -31,6 +32,7 @@ export default function Scene({
                 far={6}
                 resolution={512}
             />
+            <Capture captureRef={captureRef} />
             <Suspense>
                 <ShoeModel
                     upperColor={upperColor}
@@ -62,5 +64,15 @@ function ResponsiveCamera() {
         camera.zoom = Math.min(1, Math.max(0.4, aspect * 1.3));
         camera.updateProjectionMatrix();
     }, [camera, size]);
+    return null;
+}
+function Capture({ captureRef }) {
+    const { gl, camera, scene } = useThree();
+    useEffect(() => {
+        captureRef.current = () => {
+            gl.render(scene, camera);
+            return gl.domElement.toDataURL("image/png");
+        };
+    }, [gl, camera, scene, captureRef]);
     return null;
 }
