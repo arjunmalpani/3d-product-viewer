@@ -6,17 +6,30 @@ import SwatchRow from "./component/swatch-row";
 import { soleColors, upperColors } from "./colors";
 import { Suspense } from "react";
 import { Loader } from "@react-three/drei";
-
-const swatches = ["#1a1a1a", "#e63946", "#2a9d8f", "#264653", "#f4a261"];
+import { useRef } from "react";
+import { useEffect } from "react";
 
 function App() {
     const [upperColor, setUpperColor] = useState("#1a1a1a");
     const [soleColor, setSoleColor] = useState("#ffffff");
     const [selected, setSelected] = useState("upper");
+    const [spinning, setSpinning] = useState(true);
+    const timer = useRef(null);
+
     const isUpper = selected === "upper";
+
     const upperName = upperColors.find((c) => upperColor === c.hex)?.name;
     const soleName = soleColors.find((c) => soleColor === c.hex)?.name;
 
+    useEffect(() => () => clearTimeout(timer.current), []);
+
+    const pauseSpin = (resumeAfter) => {
+        clearTimeout(timer.current);
+        setSpinning(false);
+        if (resumeAfter) {
+            timer.current = setTimeout(() => setSpinning(true), resumeAfter);
+        }
+    };
     return (
         <div className="relative h-screen w-screen">
             {/* title and product info*/}
@@ -43,6 +56,8 @@ function App() {
                         soleColor={soleColor}
                         onSelectPart={setSelected}
                         selectedPart={selected}
+                        spinning={spinning}
+                        pauseSpin={pauseSpin}
                     />
                 </Canvas>
                 <div className="absolute bottom-6 left-0 translate-x-1/2 -translate-y-1/2 space-x-4">
@@ -50,7 +65,10 @@ function App() {
                         label={isUpper ? "Upper" : "Sole & Laces"}
                         colors={isUpper ? upperColors : soleColors}
                         value={isUpper ? upperColor : soleColor}
-                        onChange={isUpper ? setUpperColor : setSoleColor}
+                        onChange={(hex) => {
+                            pauseSpin(6000); // stay still while choosing colours
+                            isUpper ? setUpperColor(hex) : setSoleColor(hex);
+                        }}
                     />
                 </div>
             </Suspense>
