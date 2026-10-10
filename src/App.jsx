@@ -50,7 +50,10 @@ function App() {
             </div>
             {/* */}
             <Suspense>
-                <Canvas camera={{ position: [10, 10, 14], fov: 50 }}>
+                <Canvas
+                    camera={{ position: [10, 10, 16], fov: 50 }}
+                    dpr={[1, 1.5]}
+                >
                     <Scene
                         upperColor={upperColor}
                         soleColor={soleColor}
@@ -60,7 +63,7 @@ function App() {
                         pauseSpin={pauseSpin}
                     />
                 </Canvas>
-                <div className="absolute bottom-6 left-0 translate-x-1/2 -translate-y-1/2 space-x-4">
+                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 space-x-4">
                     <SwatchRow
                         label={isUpper ? "Upper" : "Sole & Laces"}
                         colors={isUpper ? upperColors : soleColors}

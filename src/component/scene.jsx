@@ -1,10 +1,8 @@
-import {
-    ContactShadows,
-    Environment,
-    OrbitControls,
-} from "@react-three/drei";
+import { ContactShadows, Environment, OrbitControls } from "@react-three/drei";
 import { Suspense } from "react";
 import ShoeModel from "./shoemodel";
+import { useThree } from "@react-three/fiber";
+import { useEffect } from "react";
 
 const RESUME_DELAY = 2000; // ms of stillness before spinning again
 
@@ -23,6 +21,7 @@ export default function Scene({
     return (
         <>
             <ambientLight intensity={0.3} />
+            <ResponsiveCamera />
             <Environment preset="city" />
             <ContactShadows
                 position={[0, 0, 0]}
@@ -48,9 +47,20 @@ export default function Scene({
                 onEnd={() => pauseSpin(RESUME_DELAY)}
                 autoRotateSpeed={-1}
                 maxDistance={30}
-                minDistance={10}
+                minDistance={15}
                 enablePan={false}
             />
         </>
     );
+}
+
+function ResponsiveCamera() {
+    const { camera, size } = useThree();
+    useEffect(() => {
+        const aspect = size.width / size.height;
+
+        camera.zoom = Math.min(1, Math.max(0.4, aspect * 1.3));
+        camera.updateProjectionMatrix();
+    }, [camera, size]);
+    return null;
 }

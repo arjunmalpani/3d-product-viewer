@@ -9,7 +9,7 @@ export default function SwatchRow({ label, colors, value, onChange }) {
                         onClick={() => onChange(c.hex)}
                         title={c.name}
                         style={{ background: c.hex }}
-                        className={`h-8 w-8 rounded-full ring-2 ${
+                        className={`h-10 w-10 rounded-full ring-2 ${
                             value === c.hex
                                 ? "ring-white/60 scale-110"
                                 : "ring-transparent"
