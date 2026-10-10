@@ -36,7 +36,7 @@
   :root {
     --text: #9ca3af;
     --text-h: #f3f4f6;
-    --bg: #16171d;
+    --bg: #00766A;
     --border: #2e303a;
     --code-bg: #1f2028;
     --accent: #c084fc;
@@ -92,9 +92,6 @@ h2 {
   @media (max-width: 1024px) {
     font-size: 20px;
   }
-}
-p {
-  margin: 0;
 }
 
 code,
