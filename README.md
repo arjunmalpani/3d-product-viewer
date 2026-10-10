@@ -1,16 +1,27 @@
-# React + Vite
+# Aero Low: 3D Product Viewer
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A 3D sneaker customiser built with React Three Fiber. Click a part of the shoe, then pick a colour.
 
-Currently, two official plugins are available:
+![Preview](./screenshots/preview.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Live demo:** https://3d-product-viewer-green.vercel.app/
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Interactive 3D model with orbit, zoom and idle auto-rotate
+- Click the upper or sole to choose which part to recolour
+- Smooth colour transitions and hover glow
+- Loading screen and entrance animation
 
-## Expanding the Oxlint configuration
+## Tech
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+React, Vite, Three.js, @react-three/fiber, @react-three/drei, Tailwind CSS
+
+## Run locally
+
+    npm install
+    npm run dev
+
+## Credits
+
+Model: "Trainer" by Jeremy, licensed under [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/), via [Poly Pizza](https://poly.pizza/m/cs7k_ENAZjQ). Colours modified.
